@@ -54,7 +54,7 @@
       </v-stepper-content> 
       <v-stepper-content step="2">
          
-        <v-card color="blue lighten-5" class="mb-2" height="480px">
+        <v-card color="white" class="mb-2" height="480px">
             <v-layout row wrap>
                 <v-flex  xs6 class = "mb-5">  
                     <div v-if="showTable">
