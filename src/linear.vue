@@ -2,7 +2,7 @@
 <div id="app" style="background: red !important">
   <v-app id="inspire">
     <v-content class="elevation-5" height="500px">
-  <v-stepper v-model="e1" alt-labels>
+  <v-stepper  v-model="e1" alt-labels>
     <v-stepper-header>
       <v-stepper-step step="1" :complete="e1 > 1"
           edit-icon accessibility
@@ -13,7 +13,7 @@
       <v-stepper-step step="3" :complete="e1 > 3"><v-icon class="mx-auto" id = "login" medium color="green darken-2">done_all</v-icon>Confirm</v-stepper-step>
     </v-stepper-header>
     <v-stepper-items>
-      <v-stepper-content step="1" class = "white" height="4000px">
+      <v-stepper-content v-if="loginGood" step="1" class = "white" height="4000px">
           <!-- <app-login height="400px"></app-login> -->
          <v-card color="blue lighten-3" class="mb-4 mx-auto elevation-20" height="400px" width = "500px">
             <div class="mx-auto" height = "600px" width="400px" style="padding-top:45px; font-family: 'Roboto', sans-serif;">
@@ -49,7 +49,8 @@
       
             </div>
         </v-card>
-        <v-btn color="success" @click.native="e1 = 2">LOGIN</v-btn>
+        <v-btn color="success" @click.native="e1=2">LOGIN</v-btn>
+        
         
       </v-stepper-content> 
       <v-stepper-content step="2">
@@ -128,6 +129,7 @@
                             <v-card-content>
                                 <v-flex style="margin-top:15px">
                             <v-dialog
+                            id="datePicker"
                             transition="fade-transition"
                             class="mx-auto"
                             style="padding-right: 25px"
@@ -211,21 +213,72 @@
                 </v-card> -->
         </v-card>
         
-       
-        <v-btn v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4" 
+       <v-tooltip color = "red" top v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4">
+           <v-btn v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4" 
             color="primary" 
             @click.native="e1 = 3" 
             disabled depressed
+            slot="activator"
         >Continue</v-btn>
+           <span v-if="date.length ==0" attach="datePicker">Select a date!</span>
+       </v-tooltip>
+        
         
         <v-btn v-if="date.length !== 0 && selectedTimes.length !== 0 && selectedTimes.length <= 4" 
             color="primary" 
-            @click.native="e1 = 3" 
+
+            @click.native = "sortTimes"
         >Continue</v-btn>
-        <v-btn flat @click.native="resetData">Cancel</v-btn>
+        <v-tooltip top light color="red">
+            <v-btn  @click.native="resetData" slot="activator">Cancel</v-btn>
+            <span>Wait! You will be <strong>logged out</strong> by cancelling</span>
+        </v-tooltip>
+        
       </v-stepper-content>
       <v-stepper-content step="3">
-        <v-card color="white" class="mb-5" height="200px"></v-card>
+        <v-card color="white" class="mb-5">
+            <v-layout row>
+                <v-flex xs4>
+                    <v-card v-for="(time,i) in selectedTimes" :key="i" class="mb-4">
+                        <v-card-title>{{ time }}</v-card-title>
+                    </v-card>
+                    
+                    <!-- <v-dialog model="showtime">
+                        <v-card>
+                            <v-card-title>
+                                <v-btn disabled>{{selectedTimes[0]}}</v-btn>
+                                <!-- <v-dialog
+                                    id="datePicker"
+                                    transition="fade-transition"
+                                    class="mx-auto"
+                                    style="padding-right: 25px"
+                                        ref="dialog"
+                                        persistent
+                                        v-model="modal"
+                                        lazy
+                                        full-width
+                                        :return-value.sync="date"
+                                    >
+                                        <v-text-field
+                                        style="margin-left:15px"
+                                        slot="activator"
+                                        label="Select Date"
+                                        v-model="date"
+                                        prepend-icon="event"
+                                        readonly
+                                        ></v-text-field>
+                                        <v-date-picker v-model="date" scrollable>
+                                        <v-spacer></v-spacer>
+                                        <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                                        <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                                        </v-date-picker>
+                            </v-dialog> -->
+                            <!-- </v-card-title> -->
+                        <!-- </v-card>
+                    </v-dialog>  -->
+                </v-flex>
+            </v-layout>
+        </v-card>
         <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
         <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
@@ -251,13 +304,15 @@ export default {
           message: 'hello',
           e1: 0,
           e2:0,
+          showTimes: true,
           email: '',
           pwd: '',
           date: '',
           showTable: true,
           showDateTime: false,
-          showTime: false,
+          showtime: false,
           selectedTimes: [],
+          loginGood: true,
           availTimes:[
               '9:30AM', '10:00AM','10:30AM','11:00AM','11:30AM','12:00PM','12:30PM', '1:00PM','1:30PM','2:00PM','2:30PM','3:00PM'
           ], 
@@ -269,11 +324,29 @@ export default {
       }
   },
   methods :{
+      sortTimes:function(){
+          var i;
+        for(i = 0; i < this.selectedTimes.length; i++){
+            var sthg = this.selectedTimes[i].split();
+            console.log((sthg[0]));
+        }
+          this.e1=3;
+      },
+      showTimes:function(){
+          this.showtime = true;
+          console.log(showtime);
+      },
       resetData:function(){
           this.e1 = 1;
           this.selectedTimes=[];
           this.showDateTime = false;
+          this.tab1=false;
+          this.tab2=false;
 
+      },
+      verifyLogin:function(){
+          this.loginGood = false;
+          setTimeout(this.e1=2, 4000);
       },
       showDateTimeFunc: function(){
           console.log(this.showDateTime);
