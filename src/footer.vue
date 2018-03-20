@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <v-footer height="70px" style=" background-color: transparent !important" width="100%">
+      <v-footer height="70px" style=" background-color: transparent !important; margin-top: -60px" width="100%">
             <v-flex xs12 py-3 text-xs-center dark blue--text height="auto" style ="background-color: inherit">
                 <div style="background-color: inherit">
                 &copy; 2018 Powered by <strong style="background-color: inherit">Rhume</strong>

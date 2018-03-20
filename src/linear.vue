@@ -70,7 +70,7 @@
                         </v-card>
                     </v-container> -->
                     <v-layout row>
-                        <v-flex xs12 offset-sm2 style="margin-top:40px">
+                        <v-flex xs12 offset-sm1 style="margin-top:40px">
                             <v-card>
                                 <v-toolbar style="background: #68b7e7" light>
                                     <v-toolbar-side-icon><v-icon>dashboard</v-icon></v-toolbar-side-icon>
@@ -121,10 +121,78 @@
                 <!-- <transition name="fade">
                 <app-date v-if="showDateTime"></app-date>
                 </transition> -->
-                <v-flex xs4 offset-xs2 class="mx-auto" style="width:300px; height:100px" >
+                <v-flex xs6 class="mt-5" style = "margin-left:0px" width="200px">
                     
                     <div v-if="showDateTime" >
-                        <v-card style="margin-top: 89px; width:300px" transition="fade-transition">
+                        <v-layout row>
+                            <v-flex xs12 offset-sm1 style="margin-top: 40px; margin">
+                                <v-card>
+                                    <v-toolbar style = "background: #68b7e7">
+                                        <v-toolbar-side-icon><v-icon>alarm_add</v-icon></v-toolbar-side-icon>
+                                        <v-toolbar-title id = "lightweight">Select Date and Time</v-toolbar-title>
+                                    </v-toolbar>
+                                        <v-list three-line >
+                                            <v-list-tile>
+                                                <v-list-tile-content>
+                                                    <v-list-tile-sub-title>
+                                                  <v-flex style="margin-top:15px">
+                                                    <v-dialog
+                                                    id="datePicker"
+                                                    transition="fade-transition"
+                                                    class="mx-auto"
+                                                    style="padding-right: 25px"
+                                                        ref="dialog"
+                                                        persistent
+                                                        v-model="modal"
+                                                        lazy
+                                                        full-width
+                                                        :return-value.sync="date"
+                                                    >
+                                                        <v-text-field
+                                                        style="margin-left:15px"
+                                                        slot="activator"
+                                                        label="Select Date"
+                                                        v-model="date"
+                                                        prepend-icon="event"
+                                                        readonly
+                                                        ></v-text-field>
+                                                        <v-date-picker v-model="date" scrollable>
+                                                        <v-spacer></v-spacer>
+                                                        <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                                                        <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                                                        </v-date-picker>
+                                                    </v-dialog>
+                                                  </v-flex>
+                                                    </v-list-tile-sub-title>
+                                                </v-list-tile-content>
+                                            </v-list-tile>
+                                            <v-list-tile>
+                                                <v-list-tile-content>
+                                                <v-list-tile-sub-title>
+                                                  <v-flex style="margin-bottom: 15px; padding-right:5px; padding-left: 35px" width="20px">
+                                                        <v-select width="15px"
+                                                        class="mx-auto"
+                                                        style="padding"
+                                                        label="Select Times"
+                                                        :items="availTimes"
+                                                        v-model="selectedTimes"
+                                                        multiple
+                                                        chips
+                                                    
+                                                        hint="Max. of 4 time slots"
+                                                        persistent-hint
+                                                        @click="showSelectedTimes"
+                                                        ></v-select>
+                                                    </v-flex>
+                                                  </v-list-tile-sub-title>
+                                                  </v-list-tile-content>
+                                            </v-list-tile>
+                                        </v-list>
+
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
+                        <!-- <v-card style="margin-top: 89px; padding-bottom: 15px;width:300px" transition="fade-transition">
                             <v-card-title class="elevation-6" style="background: #68b7e7">Select Date and Time</v-card-title>
                             <v-card-content>
                                 <v-flex style="margin-top:15px">
@@ -155,7 +223,7 @@
                                 </v-date-picker>
                             </v-dialog>
                         </v-flex>
-                        <v-flex style="margin-top; padding-right:5px; padding-left: 35px" width="20px">
+                        <v-flex style="margin-bottom: 15px; padding-right:5px; padding-left: 35px" width="20px">
                             <v-select width="15px"
                             class="mx-auto"
                             style="padding"
@@ -171,7 +239,7 @@
                             ></v-select>
                         </v-flex>
                             </v-card-content>
-                        </v-card>
+                        </v-card> -->
                         <!-- shows date and time picker -->
                         <!-- <transition-group name="fade"> -->
                         <!-- <transition> -->
@@ -236,51 +304,90 @@
         
       </v-stepper-content>
       <v-stepper-content step="3">
-        <v-card color="white" class="mb-5">
+        <v-card color="white" class="mb-5" height="480px">
             <v-layout row>
-                <v-flex xs4>
-                    <v-card v-for="(time,i) in selectedTimes" :key="i" class="mb-4">
-                        <v-card-title>{{ time }}</v-card-title>
-                    </v-card>
-                    
-                    <!-- <v-dialog model="showtime">
-                        <v-card>
-                            <v-card-title>
-                                <v-btn disabled>{{selectedTimes[0]}}</v-btn>
-                                <!-- <v-dialog
-                                    id="datePicker"
-                                    transition="fade-transition"
-                                    class="mx-auto"
-                                    style="padding-right: 25px"
-                                        ref="dialog"
-                                        persistent
-                                        v-model="modal"
-                                        lazy
-                                        full-width
-                                        :return-value.sync="date"
-                                    >
-                                        <v-text-field
-                                        style="margin-left:15px"
-                                        slot="activator"
-                                        label="Select Date"
-                                        v-model="date"
-                                        prepend-icon="event"
-                                        readonly
-                                        ></v-text-field>
-                                        <v-date-picker v-model="date" scrollable>
-                                        <v-spacer></v-spacer>
-                                        <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-                                        <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-                                        </v-date-picker>
-                            </v-dialog> -->
-                            <!-- </v-card-title> -->
-                        <!-- </v-card>
-                    </v-dialog>  -->
-                </v-flex>
-            </v-layout>
+                        <v-flex xs6 style="margin-top:40px" class="mx-auto">
+                            <v-card class="mx-auto">
+                                <v-toolbar style="background: #68b7e7" light>
+                                    <v-toolbar-side-icon><v-icon large>class</v-icon></v-toolbar-side-icon>
+                                    <v-toolbar-title id="lightweight" style="font-size:40px">Confirm Reservation</v-toolbar-title> 
+
+                                </v-toolbar>
+                                <v-list three-line subheader>
+                                    
+                                    <v-list-tile id="tileT">
+                                        <v-list-tile-content>
+                                        <v-subheader id="subheads">Times</v-subheader>
+                                        <br>
+                                        <v-list-tile-sub-title>
+                                        
+                                            
+                                            <v-layout row>
+                                                <!-- <v-flex xs2></v-flex> -->
+                                                <v-flex v-for="time in selectedTimes" :key="time">
+                                                    <v-chip class="mt-3">{{time}}</v-chip>
+                                                </v-flex>
+                                            </v-layout>
+                                            
+                                            <!-- <v-chip v-for="time in selectedTimes" :key="time">{{time}}</v-chip> -->
+                                        
+                                        </v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                    <v-divider></v-divider>
+                                    <v-list-tile id="tileT">
+                                        <v-list-tile-content>
+                                        <v-subheader height="50px" id="subheads">Date</v-subheader>
+                                        <br>
+                                        <v-list-tile-sub-title>
+                                        
+                                            <v-flex xs12 offset xs2></v-flex>
+                                            <v-flex xs6 offset-sm2 class="mx-auto">
+                                            <v-text-field
+                                                        class="mx-auto"
+                                                        style="margin-right:80px"
+                                                        v-model="date"
+                                                        prepend-icon="event"
+                                                        readonly
+                                                        disabled
+                                                        ></v-text-field>
+                                                        </v-flex>
+
+                                            
+                                            <!-- <v-chip v-for="time in selectedTimes" :key="time">{{time}}</v-chip> -->
+                                        
+                                        </v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                    <v-divider></v-divider>
+                                    <v-list-tile id="tileT">
+                                        <v-list-tile-content>
+                                            <v-subheader id="subheads">Table</v-subheader>
+                                        <br>
+                                        <v-list-tile-sub-title class="mx-auto" style="padding-top: 15px; margin-bottom: 25px; padding-left: 38%; font-size: 25px; color: black; font-weight: 100">
+                                            Table 2
+                                        </v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                    <v-tooltip right color="success">
+                        <v-btn slot = "activator" fab large id="confirm" color="success">
+                            <v-icon color="white">done_all</v-icon>
+                        </v-btn>
+                        <span><strong>Confirm Reservation</strong></span>
+                    </v-tooltip>
+                    <v-tooltip left color="warning">
+                        <v-btn slot = "activator" fab large id="edit" color="warning">
+                            <v-icon color="white">edit</v-icon>
+                        </v-btn>
+                        <span><strong>Make Changes</strong></span>
+                    </v-tooltip>
         </v-card>
-        <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
-        <v-btn flat>Cancel</v-btn>
+        
+        
       </v-stepper-content>
     </v-stepper-items>
     <app-footer></app-footer>
@@ -413,6 +520,20 @@ export default {
 .content-wrap{
     background-color: transparent;
     border: none;
+}
+#subheads{
+    font-size: 20px; 
+    padding-top: 5%; 
+    font-weight: 100; 
+    margin-bottom: -20px
+}
+#confirm{
+	left: 20%;
+	margin-top: 12px;
+}
+#edit{
+    right:20%;
+    margin-top: 12px;
 }
 </style>
 
