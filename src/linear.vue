@@ -222,7 +222,7 @@
             color="primary" 
             @click.native="e1 = 3" 
         >Continue</v-btn>
-        <v-btn flat @click.native="e1=1">Cancel</v-btn>
+        <v-btn flat @click.native="resetData">Cancel</v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
         <v-card color="white" class="mb-5" height="200px"></v-card>
@@ -269,6 +269,12 @@ export default {
       }
   },
   methods :{
+      resetData:function(){
+          this.e1 = 1;
+          this.selectedTimes=[];
+          this.showDateTime = false;
+
+      },
       showDateTimeFunc: function(){
           console.log(this.showDateTime);
           this.showDateTime=true;
