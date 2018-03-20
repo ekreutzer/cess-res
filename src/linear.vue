@@ -31,7 +31,7 @@
                             <tr>
                                 <input v-model="pwd" type = "password" placeholder = "   Rhume Password" class = "mx-auto" style = "color: blue; font-weight:100; background-color: white; margin-bottom: -20px; padding-left: 5px">
 
-                                <v-tooltip right>
+                                <v-tooltip right light>
                                     <v-btn flat icon color="gray" slot="activator"><v-icon>help_outline</v-icon></v-btn>
                                     <span>Don't have a Rhume account? Click <strong>'Create Account'</strong> below to get started!</span>
                                 </v-tooltip>
@@ -49,17 +49,17 @@
       
             </div>
         </v-card>
-        <v-btn color="primary" @click.native="e1 = 2">Continue</v-btn>
-        <v-btn flat>Cancel</v-btn>
+        <v-btn color="success" @click.native="e1 = 2">LOGIN</v-btn>
+        
       </v-stepper-content> 
       <v-stepper-content step="2">
          
         <v-card color="white" class="mb-2" height="480px">
             <v-layout row wrap>
-                <v-flex  xs6 class = "mb-5">  
+                <v-flex  xs6 class = "mt-5">  
                     <div v-if="showTable">
-                    <h1 class="headline pt-1" id = "headl">Select Space</h1>
-                    <v-container fluid grid-list-xl id="tables">
+                    <!-- <h1 class="headline pt-1" id = "headl">Select Space</h1> -->
+                    <!-- <v-container fluid grid-list-xl id="tables">
                         <v-card color="blue" class = "mb-5 mt-4" height = "125px" @click="showDateTimeFunc">
                             <v-btn class = "mx-auto elevation-0" color="success" @click="showDateTimeFunc" id="table-btn">Table 1</v-btn><div id="card-labels"><p class="display-3 mb-0" style="font-weight:100">Table 1</p> <p class="mb-0">Capacity: 6</p> <p><strong>Samsung SmartTV</strong> available</p></div>
                         </v-card>
@@ -67,16 +67,124 @@
 
                             <v-btn class = "mx-auto elevation-0" color="success" @click="showDateTimeFunc" id="table-btn">Table 2</v-btn><p class="display-3 mb-0" style="font-weight:100">Table 2</p> <p class="mb-0">Capacity: 4</p> <p><strong>Samsung SmartTV</strong> available</p>
                         </v-card>
-                    </v-container>
+                    </v-container> -->
+                    <v-layout row>
+                        <v-flex xs12 offset-sm2 style="margin-top:40px">
+                            <v-card>
+                                <v-toolbar style="background: #68b7e7" light>
+                                    <v-toolbar-side-icon><v-icon>dashboard</v-icon></v-toolbar-side-icon>
+                                    <v-toolbar-title id="lightweight">Select Table</v-toolbar-title> 
+
+                                </v-toolbar>
+                                <v-list two-line subheader>
+                                    <v-subheader id="lightweight">Choose One</v-subheader>
+                                    <v-divider></v-divider>
+                                    <v-list-tile id="tileT">
+                                        <v-list-tile-action>
+                                            <v-checkbox v-model="tab1" @click="setTable1"></v-checkbox>
+                                        </v-list-tile-action>
+                                        <v-list-tile-content
+                                            @click="setTable1"
+                                        >
+                                            <v-list-tile-title
+                                                id="lightweight"
+                                            >
+                                            Table 1
+                                            </v-list-tile-title>
+
+                                            <v-list-tile-sub-title
+                                                id="lightweight"
+                                            >Capacity: 6</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                    <v-divider></v-divider>
+                                    <v-list-tile>
+                                        <v-list-tile-action>
+                                            <v-checkbox v-model="tab2" @click="setTable2"></v-checkbox>
+                                        </v-list-tile-action>
+                                        <v-list-tile-content @click="setTable2">
+
+                                            <v-list-tile-title id="lightweight">Table 2</v-list-tile-title>
+
+                                            <v-list-tile-sub-title id = "lightweight">Capacity: 4</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+
+                                </v-list>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+
                     </div>
                 </v-flex>
-                <v-flex xs4 class="mx-auto" style="width:200px">
-                    <div v-if="showDateTime">
+                <!-- <transition name="fade">
+                <app-date v-if="showDateTime"></app-date>
+                </transition> -->
+                <v-flex xs4 offset-xs2 class="mx-auto" style="width:300px; height:100px" >
+                    
+                    <div v-if="showDateTime" >
+                        <v-card style="margin-top: 89px; width:300px" transition="fade-transition">
+                            <v-card-title class="elevation-6" style="background: #68b7e7">Select Date and Time</v-card-title>
+                            <v-card-content>
+                                <v-flex style="margin-top:15px">
+                            <v-dialog
+                            transition="fade-transition"
+                            class="mx-auto"
+                            style="padding-right: 25px"
+                                ref="dialog"
+                                persistent
+                                v-model="modal"
+                                lazy
+                                full-width
+                                :return-value.sync="date"
+                            >
+                                <v-text-field
+                                style="margin-left:15px"
+                                slot="activator"
+                                label="Select Date"
+                                v-model="date"
+                                prepend-icon="event"
+                                readonly
+                                ></v-text-field>
+                                <v-date-picker v-model="date" scrollable>
+                                <v-spacer></v-spacer>
+                                <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                                <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                                </v-date-picker>
+                            </v-dialog>
+                        </v-flex>
+                        <v-flex style="margin-top; padding-right:5px; padding-left: 35px" width="20px">
+                            <v-select width="15px"
+                            class="mx-auto"
+                            style="padding"
+                            label="Select Times"
+                            :items="availTimes"
+                            v-model="selectedTimes"
+                            multiple
+                            chips
+                        
+                            hint="Max. of 4 time slots"
+                            persistent-hint
+                            @click="showSelectedTimes"
+                            ></v-select>
+                        </v-flex>
+                            </v-card-content>
+                        </v-card>
                         <!-- shows date and time picker -->
-                        <app-date></app-date>
+                        <!-- <transition-group name="fade"> -->
+                        <!-- <transition> -->
+                        <!-- <h1 class="headline pt-1 mb-2" id="headl" >Select Date</h1>  -->
+                        <!-- </transition> -->
+                        <!-- <transition> -->
+                        
+                        <!-- </transition> -->
+                        <!-- </transition-group> -->
                     </div>
 
                 </v-flex>
+                <!-- <v-alert type="error" :value="this.selectedTimes.length > 4" transition="scale-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%">
+                    Please only select 4 time slots
+                </v-alert>   -->
                 
                 <!-- <v-flex xs4>
                     <v-container fluid grid-list-xl id="tables">
@@ -94,13 +202,30 @@
                         </v-flex>
                     </v-container>
                 </v-flex> -->
+                
+               
             </v-layout> 
+
+             <!-- <v-card style="background: #68b7e7" width="150px">
+                    <v-icon inline color="yellow">schedule</v-icon><v-card-content class="mx-auto" style = "padding-left: 5px">Test</v-card-content>
+                </v-card> -->
         </v-card>
-        <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
+        
+       
+        <v-btn v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4" 
+            color="primary" 
+            @click.native="e1 = 3" 
+            disabled depressed
+        >Continue</v-btn>
+        
+        <v-btn v-if="date.length !== 0 && selectedTimes.length !== 0 && selectedTimes.length <= 4" 
+            color="primary" 
+            @click.native="e1 = 3" 
+        >Continue</v-btn>
         <v-btn flat @click.native="e1=1">Cancel</v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
-        <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+        <v-card color="white" class="mb-5" height="200px"></v-card>
         <v-btn color="primary" @click.native="e1 = 1">Continue</v-btn>
         <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
@@ -111,6 +236,9 @@
             <app-footer></app-footer>
         </div>
     </v-content>
+    <v-alert type="error"  :value="this.selectedTimes.length > 4" transition="slide-x-reverse-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%">
+        Maximum 4 Time Slots
+    </v-alert>
   </v-app>
 </div>
 
@@ -133,6 +261,10 @@ export default {
           availTimes:[
               '9:30AM', '10:00AM','10:30AM','11:00AM','11:30AM','12:00PM','12:30PM', '1:00PM','1:30PM','2:00PM','2:30PM','3:00PM'
           ], 
+          tab1:false,
+          tab2:false,
+          
+         
           
       }
   },
@@ -146,7 +278,23 @@ export default {
           console.log(this.showTime);
           this.showTime = true;
           console.log(this.showTimeFunc)
+      },
+      showSelectedTimes:function(){
+          console.log(this.selectedTimes);
+          console.log(this.date);
+          console.log(this.date.length);
+      },
+      setTable1:function(){
+          this.tab1=true;
+          this.tab2=false;
+          setTimeout(this.showDateTime=true, 40000);
+      },
+      setTable2:function(){
+          this.tab1=false;
+          this.tab2=true;
+          setTimeout(this.showDateTime=true, 40000);
       }
+     
   }
  
 }
@@ -174,6 +322,12 @@ export default {
 }
 #card-labels{
     color: white !important;
+}
+#lightweight{
+    font-weight: 100;
+}
+#tileT:hover{
+    background-color: black !important;
 }
 </style>
 
