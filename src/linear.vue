@@ -1,7 +1,7 @@
 <template>
-<div id="app" style="background: red !important">
+<div id="app" style="background: red !important; overflow: none">
   <v-app id="inspire">
-    <v-content class="elevation-5" height="500px">
+    <v-content class="elevation-5" height="200px">
   <v-stepper  v-model="e1" alt-labels>
     <v-stepper-header>
       <v-stepper-step step="1" :complete="e1 > 1"
@@ -283,15 +283,17 @@
         <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
     </v-stepper-items>
+    <app-footer></app-footer>
   </v-stepper>
   <!-- <app-footer></app-footer> -->
-  <div fixed height="auto" style="margin-top: -50px">
+  <!-- <div fixed height="auto" style="margin-top: -50px">
             <app-footer></app-footer>
-        </div>
+        </div> -->
     </v-content>
     <v-alert type="error"  :value="this.selectedTimes.length > 4" transition="slide-x-reverse-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%">
         Maximum 4 Time Slots
     </v-alert>
+    
   </v-app>
 </div>
 
@@ -407,6 +409,10 @@ export default {
 }
 #tileT:hover{
     background-color: black !important;
+}
+.content-wrap{
+    background-color: transparent;
+    border: none;
 }
 </style>
 
