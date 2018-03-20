@@ -283,8 +283,8 @@
         
        <v-tooltip color = "red" top v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4">
            <v-btn v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4" 
-            color="primary" 
-            @click.native="e1 = 3" 
+            color="primary"  
+            @click ="goToPageThree"
             disabled depressed
             slot="activator"
         >Continue</v-btn>
@@ -310,10 +310,10 @@
                             <v-card class="mx-auto">
                                 <v-toolbar style="background: #68b7e7" light>
                                     <v-toolbar-side-icon><v-icon large>class</v-icon></v-toolbar-side-icon>
-                                    <v-toolbar-title id="lightweight" style="font-size:40px">Confirm Reservation</v-toolbar-title> 
+                                    <v-toolbar-title id="lightweight" style="font-size:2vw">Confirm Reservation</v-toolbar-title> 
 
                                 </v-toolbar>
-                                <v-list three-line subheader>
+                                <v-list three-line subheader class="mb-3">
                                     
                                     <v-list-tile id="tileT">
                                         <v-list-tile-content>
@@ -325,7 +325,7 @@
                                             <v-layout row>
                                                 <!-- <v-flex xs2></v-flex> -->
                                                 <v-flex v-for="time in selectedTimes" :key="time">
-                                                    <v-chip class="mt-3">{{time}}</v-chip>
+                                                    <v-chip class="mb-5">{{time}}</v-chip>
                                                 </v-flex>
                                             </v-layout>
                                             
@@ -364,7 +364,7 @@
                                         <v-list-tile-content>
                                             <v-subheader id="subheads">Table</v-subheader>
                                         <br>
-                                        <v-list-tile-sub-title class="mx-auto" style="padding-top: 15px; margin-bottom: 25px; padding-left: 38%; font-size: 25px; color: black; font-weight: 100">
+                                        <v-list-tile-sub-title class="mx-auto" style="padding-bottom: 1em;margin-bottom: 35px; padding-left: 38%; font-size: 1.2vw; color: black; font-weight: 100">
                                             Table 2
                                         </v-list-tile-sub-title>
                                         </v-list-tile-content>
@@ -373,18 +373,22 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
+                    <div class>
                     <v-tooltip right color="success">
                         <v-btn slot = "activator" fab large id="confirm" color="success">
+
                             <v-icon color="white">done_all</v-icon>
+                            
                         </v-btn>
                         <span><strong>Confirm Reservation</strong></span>
                     </v-tooltip>
-                    <v-tooltip left color="warning">
+                    <v-tooltip left color="warning" v-model="showEdit">
                         <v-btn slot = "activator" fab large id="edit" color="warning">
                             <v-icon color="white">edit</v-icon>
                         </v-btn>
                         <span><strong>Make Changes</strong></span>
                     </v-tooltip>
+                    </div>
         </v-card>
         
         
@@ -422,6 +426,7 @@ export default {
           showtime: false,
           selectedTimes: [],
           loginGood: true,
+          showEdit:false,
           availTimes:[
               '9:30AM', '10:00AM','10:30AM','11:00AM','11:30AM','12:00PM','12:30PM', '1:00PM','1:30PM','2:00PM','2:30PM','3:00PM'
           ], 
@@ -433,6 +438,12 @@ export default {
       }
   },
   methods :{
+      goToPageThree:function(){
+          console.log(this.showEdit);
+          this.e1=3;
+          this.showEdit=true;
+          console.log(this.showEdit);
+      },
       sortTimes:function(){
           var i;
         for(i = 0; i < this.selectedTimes.length; i++){
@@ -522,18 +533,18 @@ export default {
     border: none;
 }
 #subheads{
-    font-size: 20px; 
+    font-size: 15px; 
     padding-top: 5%; 
     font-weight: 100; 
     margin-bottom: -20px
 }
 #confirm{
 	left: 20%;
-	margin-top: 12px;
+	margin-top: 4px;
 }
 #edit{
     right:20%;
-    margin-top: 12px;
+    margin-top: 4px;
 }
 </style>
 
