@@ -117,26 +117,30 @@
                                             <v-list-tile>
                                                 <v-list-tile-content>
                                                     <v-list-tile-sub-title>
+                                                
                                                   <v-flex style="margin-top:15px">
+                                                      
                                                     <v-dialog
-                                                    id="datePicker"
-                                                    transition="fade-transition"
-                                                    class="mx-auto"
-                                                    style="padding-right: 25px"
-                                                        ref="dialog"
-                                                        persistent
-                                                        v-model="modal"
-                                                        lazy
-                                                        full-width
-                                                        :return-value.sync="date"
+                                                                id="datePicker"
+                                                                transition="fade-transition"
+                                                                class="mx-auto"
+                                                                style=""
+                                                                ref="dialog"
+                                                                persistent
+                                                                width="600px"
+                                                                v-model="modal"
+                                                                lazy
+                                                                
+                                                                :return-value.sync="date"
                                                     >
                                                         <v-text-field
-                                                        style="margin-left:15px"
-                                                        slot="activator"
-                                                        label="Select Date"
-                                                        v-model="date"
-                                                        prepend-icon="event"
-                                                        readonly
+                                                                    width="500px"
+                                                                    style="margin-left:15px"
+                                                                    slot="activator"
+                                                                    label="Select Date"
+                                                                    v-model="date"
+                                                                    prepend-icon="event"
+                                                                    readonly
                                                         ></v-text-field>
                                                         <v-date-picker v-model="date" scrollable>
                                                         <v-spacer></v-spacer>
@@ -279,7 +283,7 @@
 
                     
                     <v-tooltip bottom debounce="200" close-delay="100" color="warning" v-model="showEdit">
-                        <v-btn slot = "activator" @click.native="e1=2" fab large id="edit" color="warning" style="height:100px; width:100px">
+                        <v-btn slot = "activator" @click="makeChanges" fab large id="edit" color="warning" style="height:100px; width:100px">
                             <v-icon color="white">edit</v-icon>
                         </v-btn>
                         <span><strong>Make Changes</strong></span>
@@ -297,7 +301,7 @@
     <v-alert type="error"  :value="this.selectedTimes.length > 4" transition="slide-x-reverse-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%;">
         Maximum 4 Time Slots
     </v-alert>
-    <v-alert type="success" :value="confirmed" transition="slide-x-reverse-transition" id = "confirmALert" style="
+    <v-alert class="elevation-24" type="success" :value="confirmed" transition="slide-x-reverse-transition" id = "confirmALert" style="
                                                                         width:20%;
                                                                         bottom: 25%;
                                                                         left:35%;"
@@ -337,6 +341,10 @@ export default {
       }
   },
   methods :{
+      makeChanges:function(){
+          this.e1=2;
+          this.confirmed=false;
+      },
       goToPageThree:function(){
           console.log(this.showEdit);
           this.e1=3;

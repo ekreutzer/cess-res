@@ -5,8 +5,8 @@
         <v-toolbar id="toolbar">
             <img src = "./small-icon.png" style = "margin-top:75px; margin-left:50px">
     <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-    <v-toolbar-title class="blue--text mx-auto" id="ext-title" slot="extension">
-        CESS Breakout Space  <v-btn flat large color="success" relative disabled style="right:5%">NEW!</v-btn>
+    <v-toolbar-title class="blue--text mx-auto" id="ext-title" slot="extension"style="">
+        CESS Breakout Space  <v-btn flat large color="success" absolute disabled style="right:27%; z-index:1">NEW!</v-btn>
          <p style="font-size:12px">Reserve a Space Now!</p>
     </v-toolbar-title>
     
