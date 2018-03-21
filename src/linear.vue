@@ -301,7 +301,7 @@
     <v-alert type="error"  :value="this.selectedTimes.length > 4" transition="slide-x-reverse-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%;">
         Maximum 4 Time Slots
     </v-alert>
-    <v-alert class="elevation-24" type="success" :value="confirmed" transition="slide-x-reverse-transition" id = "confirmALert" style="
+    <v-alert outline class="elevation-24" type="success" :value="confirmed" transition="slide-x-reverse-transition" id = "confirmALert" style="
                                                                         width:20%;
                                                                         bottom: 25%;
                                                                         left:35%;"
