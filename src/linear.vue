@@ -1,5 +1,5 @@
 <template>
-<div id="app" style="background: red !important; overflow: none">
+<div id="app" style="overflow: none">
   <v-app id="inspire">
     <v-content class="elevation-5" height="200px">
   <v-stepper  v-model="e1" alt-labels>
@@ -14,7 +14,6 @@
     </v-stepper-header>
     <v-stepper-items>
       <v-stepper-content v-if="loginGood" step="1" class = "white" height="4000px">
-          <!-- <app-login height="400px"></app-login> -->
          <v-card color="blue lighten-3" class="mb-4 mx-auto elevation-20" height="400px" width = "500px">
             <div class="mx-auto" height = "600px" width="400px" style="padding-top:45px; font-family: 'Roboto', sans-serif;">
                 <img src='./2017_Sec_Logos_EduSoc_H_7484.png' style = "padding-bottom:35px">
@@ -43,10 +42,6 @@
                     
                 </div>
                 <v-btn  class="mx-auto mt-4" outline color="white" style="top: 35px">Create Account</v-btn>
-                    
-
-                <!-- <v-btn class="mx-auto" outline color="red darken-5" style="margin-top: 15px">Forgot Password?</v-btn> -->
-      
             </div>
         </v-card>
         <v-btn color="success" @click.native="e1=2">LOGIN</v-btn>
@@ -55,20 +50,10 @@
       </v-stepper-content> 
       <v-stepper-content step="2">
          
-        <v-card color="white" class="mb-2" height="480px">
+        <v-card color="white" class="mb-2 elevation-0" height="480px">
             <v-layout row wrap>
                 <v-flex  xs6 class = "mt-5">  
                     <div v-if="showTable">
-                    <!-- <h1 class="headline pt-1" id = "headl">Select Space</h1> -->
-                    <!-- <v-container fluid grid-list-xl id="tables">
-                        <v-card color="blue" class = "mb-5 mt-4" height = "125px" @click="showDateTimeFunc">
-                            <v-btn class = "mx-auto elevation-0" color="success" @click="showDateTimeFunc" id="table-btn">Table 1</v-btn><div id="card-labels"><p class="display-3 mb-0" style="font-weight:100">Table 1</p> <p class="mb-0">Capacity: 6</p> <p><strong>Samsung SmartTV</strong> available</p></div>
-                        </v-card>
-                        <v-card color="blue" class = "mb-5 mt-4" height = "125px" @click="showDateTimeFunc">
-
-                            <v-btn class = "mx-auto elevation-0" color="success" @click="showDateTimeFunc" id="table-btn">Table 2</v-btn><p class="display-3 mb-0" style="font-weight:100">Table 2</p> <p class="mb-0">Capacity: 4</p> <p><strong>Samsung SmartTV</strong> available</p>
-                        </v-card>
-                    </v-container> -->
                     <v-layout row>
                         <v-flex xs12 offset-sm1 style="margin-top:40px">
                             <v-card>
@@ -118,9 +103,6 @@
 
                     </div>
                 </v-flex>
-                <!-- <transition name="fade">
-                <app-date v-if="showDateTime"></app-date>
-                </transition> -->
                 <v-flex xs6 class="mt-5" style = "margin-left:0px" width="200px">
                     
                     <div v-if="showDateTime" >
@@ -192,93 +174,9 @@
                                 </v-card>
                             </v-flex>
                         </v-layout>
-                        <!-- <v-card style="margin-top: 89px; padding-bottom: 15px;width:300px" transition="fade-transition">
-                            <v-card-title class="elevation-6" style="background: #68b7e7">Select Date and Time</v-card-title>
-                            <v-card-content>
-                                <v-flex style="margin-top:15px">
-                            <v-dialog
-                            id="datePicker"
-                            transition="fade-transition"
-                            class="mx-auto"
-                            style="padding-right: 25px"
-                                ref="dialog"
-                                persistent
-                                v-model="modal"
-                                lazy
-                                full-width
-                                :return-value.sync="date"
-                            >
-                                <v-text-field
-                                style="margin-left:15px"
-                                slot="activator"
-                                label="Select Date"
-                                v-model="date"
-                                prepend-icon="event"
-                                readonly
-                                ></v-text-field>
-                                <v-date-picker v-model="date" scrollable>
-                                <v-spacer></v-spacer>
-                                <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-                                <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-                                </v-date-picker>
-                            </v-dialog>
-                        </v-flex>
-                        <v-flex style="margin-bottom: 15px; padding-right:5px; padding-left: 35px" width="20px">
-                            <v-select width="15px"
-                            class="mx-auto"
-                            style="padding"
-                            label="Select Times"
-                            :items="availTimes"
-                            v-model="selectedTimes"
-                            multiple
-                            chips
-                        
-                            hint="Max. of 4 time slots"
-                            persistent-hint
-                            @click="showSelectedTimes"
-                            ></v-select>
-                        </v-flex>
-                            </v-card-content>
-                        </v-card> -->
-                        <!-- shows date and time picker -->
-                        <!-- <transition-group name="fade"> -->
-                        <!-- <transition> -->
-                        <!-- <h1 class="headline pt-1 mb-2" id="headl" >Select Date</h1>  -->
-                        <!-- </transition> -->
-                        <!-- <transition> -->
-                        
-                        <!-- </transition> -->
-                        <!-- </transition-group> -->
                     </div>
-
                 </v-flex>
-                <!-- <v-alert type="error" :value="this.selectedTimes.length > 4" transition="scale-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%">
-                    Please only select 4 time slots
-                </v-alert>   -->
-                
-                <!-- <v-flex xs4>
-                    <v-container fluid grid-list-xl id="tables">
-                        <h1 class="headline" id="headl" style="margin-top: -20px">Select Time</h1>
-                        <v-flex style="margin-top:30%">
-                            <v-select
-                            label="Select"
-                            :items="availTimes"
-                            v-model="selectedTimes"
-                            multiple
-                            chips
-                            hint="Max. of 4 time slots"
-                            persistent-hint
-                            ></v-select>
-                        </v-flex>
-                    </v-container>
-                </v-flex> -->
-                
-               
-            </v-layout> 
-
-             <!-- <v-card style="background: #68b7e7" width="150px">
-                    <v-icon inline color="yellow">schedule</v-icon><v-card-content class="mx-auto" style = "padding-left: 5px">Test</v-card-content>
-                </v-card> -->
+               </v-layout> 
         </v-card>
         
        <v-tooltip color = "red" top v-if="date.length == 0 || selectedTimes.length == 0 || selectedTimes.length > 4">
@@ -304,58 +202,46 @@
         
       </v-stepper-content>
       <v-stepper-content step="3">
-        <v-card color="white" class="mb-5" height="480px">
+        <v-card color="white" class="mb-5 elevation-0" height="480px">
             <v-layout row>
                         <v-flex xs6 style="margin-top:40px" class="mx-auto">
-                            <v-card class="mx-auto">
-                                <v-toolbar style="background: #68b7e7" light>
+                            <v-card class="mx-auto elevation-10" height="100%">
+                                <v-toolbar style="background: #68b7e7" light class = "elevation-6">
                                     <v-toolbar-side-icon><v-icon large>class</v-icon></v-toolbar-side-icon>
                                     <v-toolbar-title id="lightweight" style="font-size:2vw">Confirm Reservation</v-toolbar-title> 
 
                                 </v-toolbar>
                                 <v-list three-line subheader class="mb-3">
                                     
-                                    <v-list-tile id="tileT">
+                                    <v-list-tile id="tileT" height="100px">
                                         <v-list-tile-content>
-                                        <v-subheader id="subheads">Times</v-subheader>
-                                        <br>
+                                        <v-subheader id="subheads" height="10px">Times</v-subheader>
+                                        
                                         <v-list-tile-sub-title>
                                         
                                             
                                             <v-layout row>
                                                 <!-- <v-flex xs2></v-flex> -->
                                                 <v-flex v-for="time in selectedTimes" :key="time">
-                                                    <v-chip class="mb-5">{{time}}</v-chip>
+                                                    <v-chip class="mb-5 elevation-1" color="info">{{time}}</v-chip>
                                                 </v-flex>
                                             </v-layout>
-                                            
-                                            <!-- <v-chip v-for="time in selectedTimes" :key="time">{{time}}</v-chip> -->
-                                        
                                         </v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
                                     <v-divider></v-divider>
                                     <v-list-tile id="tileT">
                                         <v-list-tile-content>
-                                        <v-subheader height="50px" id="subheads">Date</v-subheader>
-                                        <br>
-                                        <v-list-tile-sub-title>
-                                        
-                                            <v-flex xs12 offset xs2></v-flex>
-                                            <v-flex xs6 offset-sm2 class="mx-auto">
-                                            <v-text-field
-                                                        class="mx-auto"
-                                                        style="margin-right:80px"
-                                                        v-model="date"
-                                                        prepend-icon="event"
-                                                        readonly
-                                                        disabled
-                                                        ></v-text-field>
-                                                        </v-flex>
-
-                                            
-                                            <!-- <v-chip v-for="time in selectedTimes" :key="time">{{time}}</v-chip> -->
-                                        
+                                        <v-subheader height="30px" id="subheads">Date</v-subheader>
+                                      
+                                        <v-list-tile-sub-title class="mx-auto">
+                                        <v-layout row>
+                                            <!-- <v-flex xs3 offset xs2></v-flex> -->
+                                            <v-flex class="mx-auto">
+                                                <p style="height:40px; font-size:2vw; font-weight:100; color: black" class="mb-5">&nbsp;&nbsp;{{date}}&nbsp;&nbsp;</p>
+                                            </v-flex>
+                                            </v-layout>
+                                            <!-- <v-flex xs3></v-flex> -->
                                         </v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
@@ -363,9 +249,15 @@
                                     <v-list-tile id="tileT">
                                         <v-list-tile-content>
                                             <v-subheader id="subheads">Table</v-subheader>
-                                        <br>
-                                        <v-list-tile-sub-title class="mx-auto" style="padding-bottom: 1em;margin-bottom: 35px; padding-left: 38%; font-size: 1.2vw; color: black; font-weight: 100">
-                                            Table 2
+                                     
+                                        <v-list-tile-sub-title style="font-size: 2vw; color: black; font-weight: 100">
+                                            <v-layout row>
+                                                <v-flex>
+                                                    <p class="" color="info" style="height:40px; font-size:2vw">&nbsp;&nbsp;Table 2&nbsp;&nbsp;</p>
+
+                                                </v-flex>
+                                            </v-layout>
+                                            
                                         </v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
@@ -374,20 +266,25 @@
                         </v-flex>
                     </v-layout>
                     <div class>
-                    <v-tooltip right color="success">
-                        <v-btn slot = "activator" fab large id="confirm" color="success">
-
-                            <v-icon color="white">done_all</v-icon>
+                        
+                    <v-tooltip bottom color="success">
+                        <v-btn slot = "activator" @click="confirmed = !confirmed" fab large id="confirm" color="success" style="height:100px; width:100px">
+                            
+                            <v-icon color="white" >done_all</v-icon>
                             
                         </v-btn>
                         <span><strong>Confirm Reservation</strong></span>
                     </v-tooltip>
-                    <v-tooltip left color="warning" v-model="showEdit">
-                        <v-btn slot = "activator" fab large id="edit" color="warning">
+                      
+
+                    
+                    <v-tooltip bottom debounce="200" close-delay="100" color="warning" v-model="showEdit">
+                        <v-btn slot = "activator" @click.native="e1=2" fab large id="edit" color="warning" style="height:100px; width:100px">
                             <v-icon color="white">edit</v-icon>
                         </v-btn>
                         <span><strong>Make Changes</strong></span>
                     </v-tooltip>
+                    
                     </div>
         </v-card>
         
@@ -396,14 +293,15 @@
     </v-stepper-items>
     <app-footer></app-footer>
   </v-stepper>
-  <!-- <app-footer></app-footer> -->
-  <!-- <div fixed height="auto" style="margin-top: -50px">
-            <app-footer></app-footer>
-        </div> -->
     </v-content>
-    <v-alert type="error"  :value="this.selectedTimes.length > 4" transition="slide-x-reverse-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%">
+    <v-alert type="error"  :value="this.selectedTimes.length > 4" transition="slide-x-reverse-transition" icon="schedule" style="bottom:45%; margin-top:35px; left:52%;">
         Maximum 4 Time Slots
     </v-alert>
+    <v-alert type="success" :value="confirmed" transition="slide-x-reverse-transition" id = "confirmALert" style="
+                                                                        width:20%;
+                                                                        bottom: 25%;
+                                                                        left:35%;"
+    >Confirmed</v-alert>
     
   </v-app>
 </div>
@@ -427,6 +325,7 @@ export default {
           selectedTimes: [],
           loginGood: true,
           showEdit:false,
+          confirmed:false,
           availTimes:[
               '9:30AM', '10:00AM','10:30AM','11:00AM','11:30AM','12:00PM','12:30PM', '1:00PM','1:30PM','2:00PM','2:30PM','3:00PM'
           ], 
@@ -534,17 +433,24 @@ export default {
 }
 #subheads{
     font-size: 15px; 
-    padding-top: 5%; 
+    /* padding-top: 5%;  */
     font-weight: 100; 
-    margin-bottom: -20px
+    /* margin-bottom: -20px */
 }
 #confirm{
 	left: 20%;
-	margin-top: 4px;
+	margin-top: 25px;
+    margin-bottom: 45px
 }
 #edit{
     right:20%;
-    margin-top: 4px;
+    margin-top: 25px;
+    margin-bottom: 45px;
+}
+#confirmAlert{
+    width:20%;
+    bottom: 35px;
+    left:55px;
 }
 </style>
 
