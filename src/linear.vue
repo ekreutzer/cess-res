@@ -127,24 +127,27 @@
                                                                 style=""
                                                                 ref="dialog"
                                                                 persistent
-                                                                width="600px"
+                                                                width="800px"
                                                                 v-model="modal"
                                                                 lazy
                                                                 
                                                                 :return-value.sync="date"
                                                     >
                                                         <v-text-field
-                                                                    width="500px"
-                                                                    style="margin-left:15px"
+                                                                    width="800px"
+                                                                    style="margin-left:15px; font-size:30px;"
                                                                     slot="activator"
                                                                     label="Select Date"
                                                                     v-model="date"
+                                                                    
                                                                     prepend-icon="event"
+                                                                    
                                                                     readonly
                                                         ></v-text-field>
-                                                        <v-date-picker v-model="date" scrollable>
+                                                        <v-date-picker color = "info" min="2018-03-21" width="150px" v-model="date" light>
                                                         <v-spacer></v-spacer>
                                                         <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+
                                                         <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
                                                         </v-date-picker>
                                                     </v-dialog>
@@ -227,7 +230,7 @@
                                             <v-layout row>
                                                 <!-- <v-flex xs2></v-flex> -->
                                                 <v-flex v-for="time in selectedTimes" :key="time">
-                                                    <v-chip class="mb-5 elevation-1" color="info">{{time}}</v-chip>
+                                                    <v-chip class="mb-5 elevation-1" color="info" style="color:white">{{time}}</v-chip>
                                                 </v-flex>
                                             </v-layout>
                                         </v-list-tile-sub-title>
@@ -330,6 +333,7 @@ export default {
           loginGood: true,
           showEdit:false,
           confirmed:false,
+          modal: false,
           availTimes:[
               '9:30AM', '10:00AM','10:30AM','11:00AM','11:30AM','12:00PM','12:30PM', '1:00PM','1:30PM','2:00PM','2:30PM','3:00PM'
           ], 

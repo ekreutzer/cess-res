@@ -1,6 +1,6 @@
 <template>
 
-<div>
+<div style="background-color:black">
  
 <app-jumbo>
 </app-jumbo>
