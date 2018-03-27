@@ -1,13 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
+// UI KIT
 import Vuetify from 'vuetify'
+// LINEAR STEPPER
 import Linear from './linear.vue'
-import Login from './login.vue'
+// SITE HEADER
 import Jumbotron from './jumbo.vue'
-import Floater from './floatingAction.vue'
+// import Floater from './floatingAction.vue'
 import Footer from './footer.vue'
-import PoweredBy from './poweredBy.vue'
-import DatePicker from './datePicker.vue'
+// import PoweredBy from './poweredBy.vue'
+// import DatePicker from './datePicker.vue'
+
+// VUE CSS
 import 'vuetify/dist/vuetify.min.css' 
 
 Vue.use(Vuetify, {

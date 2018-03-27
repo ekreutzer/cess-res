@@ -1,13 +1,10 @@
 <template>
 
-<div style="background-color:black">
- 
-<app-jumbo>
-</app-jumbo>
+<div>
+    <!-- PARENT COMPONENT OF STEPPER AND FOOTER -->
+    <app-jumbo></app-jumbo>
 
-  <!-- <app-footer></app-footer> -->
-
-  </div>
+</div>
 
 </template>
 
